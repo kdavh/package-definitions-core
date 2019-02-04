@@ -1,0 +1,8 @@
+rust:
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      dependencies: ['@:curl']
+      check_install: |
+        which rust
+      install: |
+        curl https://sh.rustup.rs -sSf | sh

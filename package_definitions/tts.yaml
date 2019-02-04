@@ -1,0 +1,9 @@
+tts:
+  definitions:
+    - os_flavors: ['debian']
+      check_install: which flite
+      install: |
+        sudo apt install -y flite
+        # get good tts voice for flite
+        mkdir -p $HOME/.local/share/data/tts/
+        wget -O $HOME/.local/share/data/tts/cmu_us_bdl.flitevox "http://www.festvox.org/flite/packed/flite-2.0/voices/cmu_us_bdl.flitevox"

@@ -1,0 +1,47 @@
+---
+dotfiles:
+  dependencies: ['@:_dotfiles_base']
+  definitions:
+    - os_flavors: ['mac']
+      check_install: |
+        # checking if profile is already in Terminal.app
+        /usr/libexec/PlistBuddy -c "print :'Window Settings':mac-terminal-app-profile" ~/Library/Preferences/com.apple.Terminal.plist  >/dev/null
+      install: |
+        echo 'NEW TERMINAL WINDOW WILL OPEN WITH PREFERRED THEME'
+        echo 'GO TO PREFERENCES AND MAKE IT DEFAULT MANUALLY'
+        open $HOME/dev/dotfiles/sh/mac-terminal-app-profile.terminal
+
+
+_dotfiles_base:
+  dependencies: ['@:git']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        test -d $HOME/dev/dotfiles && test -L $HOME/.shellrc
+      install: |
+        git clone git@github.com:kdavh/dotfiles.git $HOME/dev
+        DOTFILES=$HOME/dev/dotfiles
+        ln -fs ${DOTFILES}/bash/.bashrc ${HOME}/
+        ln -fs ${DOTFILES}/bash/.bash_profile ${HOME}/
+        # ln -fs ${DOTFILES}/zsh/.zprofile ${HOME}/
+        # ln -fs ${DOTFILES}/zsh/.zshrc ${HOME}/
+        # ln -fns ${DOTFILES}/zsh/.zsh ${HOME}/
+        ln -fs ${DOTFILES}/sh/.profile ${HOME}/
+        ln -fs ${DOTFILES}/sh/.shellrc ${HOME}/
+        ln -fs ${DOTFILES}/.editrc ${HOME}
+
+        # TODO: move to git
+
+        ln -fs ${DOTFILES}/git/.gitconfig ${HOME}/.gitconfig
+        ln -fs ${DOTFILES}/git/.gitignore ${HOME}/.gitignore
+        ln -fs ${DOTFILES}/git/.git-completion.bash ${HOME}/.git-completion.bash
+
+
+dotfiles_private:
+  dependencies: ['@:git']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        test -d $HOME/dev/dotfiles-private
+      install: |
+        git clone git@github.com:kdavh/dotfiles-private.git $HOME/dev

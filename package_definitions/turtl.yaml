@@ -1,0 +1,25 @@
+---
+turtl:
+  definitions:
+    - os_flavors: ['debian']
+      check_install: |
+        test -d $HOME/apps/turtl
+      install: |
+        cd $HOME
+        download_link=$(curl https://turtlapp.com/download/ -s | grep -Po 'href="https:.*linux64.tar.bz2"' | grep -Po 'https:.*tar.bz2')
+        curl -L $download_link > turtl.tar.bz2
+        tar xjf turtl.tar.bz2
+        ./turtl/install.sh ./apps/turtl
+        rm turtl.tar.bz2 && rm -r turtl
+
+    - os_flavors: ['mac']
+      check_install: |
+        test -d /Applications/Turtl.app
+      install: |
+        cd $HOME
+        download_link=$(curl https://turtlapp.com/download/ -s | grep -Eo 'href="https:.*osx.zip"' | grep -Eo 'https:.*osx.zip')
+        curl -L $download_link > turtl.zip
+        unzip turtl.zip
+        mv Turtl.app /Applications
+        rm turtl.zip
+

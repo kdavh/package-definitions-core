@@ -1,0 +1,9 @@
+docker:
+  definitions:
+    - os_flavors: ['mac']
+      check_install: brew ls --versions docker && brew ls --versions docker-compose
+      install: |
+        brew install -y docker
+        brew install -y docker-compose
+        # installs gui for docker daemon
+        brew cask install docker

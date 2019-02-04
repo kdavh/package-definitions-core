@@ -1,0 +1,23 @@
+---
+golang:
+  definitions:
+    - os_flavors: ['debian']
+      check_install: |
+        command -v go
+      install: |
+        cd $HOME
+        sudo apt install -y gccgo
+        download_link=$(curl -s https://golang.org/dl/ | grep -Po -m 1 'href="https://dl.google.com.*linux-amd64.tar.gz"' | grep -Po 'https.*tar.gz')
+        curl $download_link > golang.tar.gz
+        sudo tar -C /usr/local -xzf golang.tar.gz
+        rm golang.tar.gz
+
+    - os_flavors: ['mac']
+      check_install: |
+        command -v go
+      install: |
+        cd $HOME
+        download_link=$(curl -s https://golang.org/dl/ | grep -Eo -m 1 'href="https://dl.google.com.*.darwin-amd64.pkg"' | grep -Eo 'https.*amd64.pkg')
+        curl $download_link > golang.pkg
+        sudo installer -pkg golang.pkg -target /
+        rm golang.pkg

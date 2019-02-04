@@ -1,0 +1,4 @@
+make:
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      package_name: make

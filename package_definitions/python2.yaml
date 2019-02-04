@@ -1,0 +1,8 @@
+python2:
+  definitions:
+    - os_flavors: ['mac']
+      check_install: |
+        which python2
+      install: |
+        brew install python@2
+        pip2 install virtualenv

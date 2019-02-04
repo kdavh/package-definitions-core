@@ -1,0 +1,5 @@
+---
+ag:
+  definitions:
+    - os_flavors: ['debian']
+      package_name: silversearcher-ag

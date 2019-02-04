@@ -1,0 +1,49 @@
+---
+_vscode_base:
+  definitions:
+    - os_flavors: ['debian']
+      check_install: |
+        command -v code
+      install: |
+        curl -L https://update.code.visualstudio.com/latest/linux-deb-x64/stable > vscode.deb
+        sudo apt install vscode.deb
+        rm vscode.deb
+
+        DOTFILES=$HOME/dev/dotfiles
+        vscode_dir="$HOME/.config/Code/User/"
+        ln -fs $DOTFILES/vscode/settings.json "${vscode_dir}"
+        rm -r "${vscode_dir}"/snippets
+        ln -fns $DOTFILES/vscode/snippets "${vscode_dir}"
+
+    - os_flavors: ['mac']
+      check_install: |
+        command -v code
+      install: |
+        curl -L https://update.code.visualstudio.com/latest/darwin/stable > vscode.zip
+        unzip vscode.zip
+        rm vscode.zip
+        mv "Visual Studio Code.app" /Applications
+        echo "Please run command"'"'"Shell Command: Install 'code' command in PATH"'"'" when vscode opens, then close window"
+        "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --new-window --wait
+        # allow key repeats
+        defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+        defaults delete -g ApplePressAndHoldEnabled  # If necessary, reset global default
+
+        DOTFILES=$HOME/dev/dotfiles
+        vscode_dir="$HOME/Library/Application Support/Code/User/"
+        ln -fs $DOTFILES/vscode/settings.json "${vscode_dir}"
+        rm -r "${vscode_dir}"/snippets
+        ln -fns $DOTFILES/vscode/snippets "${vscode_dir}"
+
+
+vscode:
+  dependencies: ['@:_vscode_base', '@:golang']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        command -v code && code --list-extensions | grep vscodevim
+      install: |
+        go get -u mvdan.cc/sh/cmd/shfmt
+        code --install-extension foxundermoon.shell-format
+        code --install-extension ms-python.python
+        code --install-extension vscodevim.vim
