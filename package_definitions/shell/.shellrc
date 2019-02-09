@@ -1,0 +1,122 @@
+echo "${INDENT}Loading ~/.shellrc"
+
+alias la='ls -la'
+
+# help
+alias g='git'
+alias gh='AUTH_TOKEN=$GITHUB_REPO_EDIT_TOKEN ${DOTFILES}/lib/kdavh/github_api.sh'
+
+# sql shortcuts
+alias sqls="select * from "
+
+alias tm="tmux"
+alias tm0="tmux new-session -t 0"
+alias nv="nvim"
+
+# golang
+alias gotc='go test -v . | sed '"''"'/PASS/s//$(printf "\033[32mPASS\033[0m")/'"''"' | sed '"''"'/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'"''"''
+alias gotw='$GOPATH/bin/goconvey -excludedDirs "db"'
+
+# linux, debian
+alias apin='sudo apt-get install'
+alias aprm='sudo apt-get remove'
+alias apclean='sudo apt-get autoremove; sudo apt-get autoclean'
+alias apshow='apt-cache show'
+
+# linux, arch
+alias pcin='sudo pacman -S'
+alias pcrm='sudo pacman -Rs'
+alias pcshow='sudo pacman -Ss'
+
+# xkcdpass default
+alias xkcdpass1='xkcdpass --count=5 --min=4 --max=11 --numwords=5 -d ""'
+
+# start postgresql installed by brew
+alias psql-brew-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+
+# docker
+alias dk=docker
+alias dkc=docker-compose
+alias dkm=docker-machine
+alias dk-start="systemctl start docker.service"
+alias dk-clean-i='docker rmi $(docker images -q --filter "dangling=true")'
+# docker based executables
+# https://hub.docker.com/r/codesimple/elm/
+alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 kdavh/elm'
+alias yarnsrv='PORTS=1 yarndk'
+alias yarnaws='AWS=1 yarndk'
+alias yarnsh='CMD=bash yarndk'
+
+
+alias mk=make
+alias pf=printf
+# alias cat=bat
+# alias preview="fzf --preview 'bat --color \"always\" {}'"
+# add support for ctrl+o to open selected file in Atom
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(atom -n {})+abort'"
+# alias top=htop
+# alias du="ncdu -r -x --exclude .git --exclude node_modules"
+# alias help='tldr'
+# alias man='tldr'
+
+# network info
+alias ss-='ss -aut' # optional -e or -p for extended or program using socket info; `netstat` is no longer common
+alias ip-='ip addr show' # all network adapters, `ifconfig` is deprecated
+alias ip-ext='wget http://ipinfo.io/ip -qO -' # ping website to get public facing ip outside lan
+alias ngrep-='ngrep -d any -W byline 'HTTP/1.1' port 80' # monitor all http traffic on port 80, print pretty headers. if nothing is set up to recieve, no appreciable output except ###
+
+# process info
+alias ps-="ps aux | grep"
+
+alias fg1="fg %1"
+alias fg2="fg %2"
+alias fg3="fg %3"
+
+# bluetooth reset for pulse audio driver
+alias bluetooth-reset='pactl suspend-sink 1 && pactl suspend-sink 0'
+
+# disk info
+alias disk-usage='df'
+alias directory-size='du -sh'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# find ssh-agent or start one
+source ${DOTFILES}/lib/kdavh/ssh-helpers.sh
+sshagent_init > /dev/null
+
+ip() {
+  echo -e "WiFi:\t\t `ipconfig getifaddr en0 2> /dev/null`"
+  echo -e "Ethernet:\t `ipconfig getifaddr en1 2> /dev/null`"
+  echo -e "External:\t `curl -s http://checkip.dyndns.org/ | grep -o '[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*.[0-9]*'`"
+}
+
+extract() {
+      if [ -f $1 ] ; then
+              case $1 in
+                      *.tar.bz2)      tar xjf $1              ;;
+                      *.tar.gz)       tar xzf $1              ;;
+                      *.bz2)          bunzip2 $1              ;;
+                      *.rar)          rar x $1                ;;
+                      *.gz)           gunzip $1               ;;
+                      *.tar)          tar xf $1               ;;
+                      *.tbz2)         tar xjf $1              ;;
+                      *.tgz)          tar xzf $1              ;;
+                      *.zip)          unzip $1                ;;
+                      *.Z)            uncompress $1   ;;
+                      *)              echo "'$1' cannot be extracted via extract()" ;;
+              esac
+      else
+              echo "'$1' is not a valid file"
+      fi
+}
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"

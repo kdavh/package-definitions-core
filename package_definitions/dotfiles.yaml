@@ -10,6 +10,11 @@ dotfiles:
         echo 'NEW TERMINAL WINDOW WILL OPEN WITH PREFERRED THEME'
         echo 'GO TO PREFERENCES AND MAKE IT DEFAULT MANUALLY'
         open $HOME/dev/dotfiles/sh/mac-terminal-app-profile.terminal
+    - os_flavors: ['debian']
+      check_install: |
+        test 1 = 1
+      install: |
+        # echo 'manual setup..., do what you like'
 
 
 _dotfiles_base:
