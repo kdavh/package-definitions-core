@@ -1,0 +1,20 @@
+---
+system_config:
+  definitions:
+    - os_flavors: ['mac']
+      check_install: |
+        test $(defaults read com.apple.finder AppleShowAllFiles) = '1'
+      install: |
+        # show hidden files in Finder
+        defaults write com.apple.finder AppleShowAllFiles -boolean true; killall Finder # to restart
+
+        computer_name="${USER}-mac"
+        sudo scutil --set ComputerName "${computer_name}"
+        sudo scutil --set LocalHostName "${computer_name}"
+        sudo scutil --set HostName "${computer_name}"
+
+    - os_flavors: ['debian']
+      check_install: |
+        test 1 = 1
+      install: |
+        # echo 'manual setup..., do what you like'

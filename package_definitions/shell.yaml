@@ -26,6 +26,7 @@ _shell_base:
       install: |
         mkdir $HOME/.profile.d || true
         mkdir $HOME/.shellrc.d || true
+        mkdir $HOME/bin || true
 
         ln -fs ${DATA_DIR}/shell/.bashrc ${HOME}/
         ln -fs ${DATA_DIR}/shell/.bash_profile ${HOME}/

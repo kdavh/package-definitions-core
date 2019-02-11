@@ -3,6 +3,8 @@
 echo "${INDENT}Loading ~/.shellrc"
 
 alias la='ls -la'
+alias ..='cd ..'
+alias ...='cd ...'
 
 # sql shortcuts
 alias sqls="select * from "
