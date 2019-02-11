@@ -9,11 +9,10 @@ _vscode_base:
         sudo apt install vscode.deb
         rm vscode.deb
 
-        DOTFILES=$HOME/dev/dotfiles
         vscode_dir="$HOME/.config/Code/User/"
-        ln -fs $DOTFILES/vscode/settings.json "${vscode_dir}"
-        rm -r "${vscode_dir}"/snippets
-        ln -fns $DOTFILES/vscode/snippets "${vscode_dir}"
+        ln -fs $DATA_DIR/vscode/settings.json "${vscode_dir}"
+        # rm -r "${vscode_dir}"/snippets
+        # ln -fns $DATA_DIR/vscode/snippets "${vscode_dir}"
 
     - os_flavors: ['mac']
       check_install: |
@@ -29,11 +28,10 @@ _vscode_base:
         defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
         defaults delete -g ApplePressAndHoldEnabled  # If necessary, reset global default
 
-        DOTFILES=$HOME/dev/dotfiles
         vscode_dir="$HOME/Library/Application Support/Code/User/"
-        ln -fs $DOTFILES/vscode/settings.json "${vscode_dir}"
-        rm -r "${vscode_dir}"/snippets
-        ln -fns $DOTFILES/vscode/snippets "${vscode_dir}"
+        ln -fs $DATA_DIR/vscode/settings.json "${vscode_dir}"
+        # rm -r "${vscode_dir}"/snippets
+        # ln -fns $DATA_DIR/vscode/snippets "${vscode_dir}"
 
 
 vscode:

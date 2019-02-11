@@ -1,4 +1,14 @@
 git:
   definitions:
     - os_flavors: ['debian', 'mac']
-      package_name: git
+      dependencies: ['@:shell']
+      check_install: |
+        read
+        package_manager_check_install git
+      install: |
+        package_manager_install git
+        ln -fs ${DATA_DIR}/git/.gitconfig ${HOME}/.gitconfig
+        ln -fs ${DATA_DIR}/git/.gitignore ${HOME}/.gitignore
+        ln -fs ${DATA_DIR}/git/.git-completion.bash ${HOME}/.git-completion.bash
+
+        ln -fs ${DATA_DIR}/git/git.shellrc ${HOME}/.shellrc.d

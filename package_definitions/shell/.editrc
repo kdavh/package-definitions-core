@@ -1,0 +1,4 @@
+# allow basic nav like M-f / M-b forward / back word in irb, pry and other readline programs
+# bind "\\eb" vi-prev-word\nbind "\\ef" vi-next-word
+bind -v
+bind \\t rl_complete

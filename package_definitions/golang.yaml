@@ -12,6 +12,9 @@ golang:
         sudo tar -C /usr/local -xzf golang.tar.gz
         rm golang.tar.gz
 
+        ln -fs ${DATA_DIR}/golang/golang.profile ${HOME}/.profile.d
+        ln -fs ${DATA_DIR}/golang/golang.shellrc ${HOME}/.shellrc.d
+
     - os_flavors: ['mac']
       check_install: |
         command -v go
@@ -21,3 +24,6 @@ golang:
         curl $download_link > golang.pkg
         sudo installer -pkg golang.pkg -target /
         rm golang.pkg
+
+        ln -fs ${DATA_DIR}/golang/golang.profile ${HOME}/.profile.d
+        ln -fs ${DATA_DIR}/golang/golang.shellrc ${HOME}/.shellrc.d

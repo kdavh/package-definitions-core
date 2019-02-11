@@ -11,3 +11,5 @@ nvm:
           git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
         ) && source "$NVM_DIR/nvm.sh"
         nvm install node
+
+        ln -fs ${DATA_DIR}/nvm/nvm.shellrc ${HOME}/.shellrc.d

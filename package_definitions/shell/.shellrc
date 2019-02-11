@@ -1,63 +1,14 @@
+#!/bin/sh
+
 echo "${INDENT}Loading ~/.shellrc"
 
 alias la='ls -la'
 
-# help
-alias g='git'
-alias gh='AUTH_TOKEN=$GITHUB_REPO_EDIT_TOKEN ${DOTFILES}/lib/kdavh/github_api.sh'
-
 # sql shortcuts
 alias sqls="select * from "
 
-alias tm="tmux"
-alias tm0="tmux new-session -t 0"
-alias nv="nvim"
-
-# golang
-alias gotc='go test -v . | sed '"''"'/PASS/s//$(printf "\033[32mPASS\033[0m")/'"''"' | sed '"''"'/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'"''"''
-alias gotw='$GOPATH/bin/goconvey -excludedDirs "db"'
-
-# linux, debian
-alias apin='sudo apt-get install'
-alias aprm='sudo apt-get remove'
-alias apclean='sudo apt-get autoremove; sudo apt-get autoclean'
-alias apshow='apt-cache show'
-
-# linux, arch
-alias pcin='sudo pacman -S'
-alias pcrm='sudo pacman -Rs'
-alias pcshow='sudo pacman -Ss'
-
-# xkcdpass default
-alias xkcdpass1='xkcdpass --count=5 --min=4 --max=11 --numwords=5 -d ""'
-
-# start postgresql installed by brew
-alias psql-brew-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-
-# docker
-alias dk=docker
-alias dkc=docker-compose
-alias dkm=docker-machine
-alias dk-start="systemctl start docker.service"
-alias dk-clean-i='docker rmi $(docker images -q --filter "dangling=true")'
-# docker based executables
-# https://hub.docker.com/r/codesimple/elm/
-alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 kdavh/elm'
-alias yarnsrv='PORTS=1 yarndk'
-alias yarnaws='AWS=1 yarndk'
-alias yarnsh='CMD=bash yarndk'
-
-
 alias mk=make
 alias pf=printf
-# alias cat=bat
-# alias preview="fzf --preview 'bat --color \"always\" {}'"
-# add support for ctrl+o to open selected file in Atom
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(atom -n {})+abort'"
-# alias top=htop
-# alias du="ncdu -r -x --exclude .git --exclude node_modules"
-# alias help='tldr'
-# alias man='tldr'
 
 # network info
 alias ss-='ss -aut' # optional -e or -p for extended or program using socket info; `netstat` is no longer common
@@ -66,25 +17,18 @@ alias ip-ext='wget http://ipinfo.io/ip -qO -' # ping website to get public facin
 alias ngrep-='ngrep -d any -W byline 'HTTP/1.1' port 80' # monitor all http traffic on port 80, print pretty headers. if nothing is set up to recieve, no appreciable output except ###
 
 # process info
-alias ps-="ps aux | grep"
+alias psg="ps aux | grep"
 
 alias fg1="fg %1"
 alias fg2="fg %2"
 alias fg3="fg %3"
 
-# bluetooth reset for pulse audio driver
-alias bluetooth-reset='pactl suspend-sink 1 && pactl suspend-sink 0'
-
 # disk info
 alias disk-usage='df'
 alias directory-size='du -sh'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# find ssh-agent or start one
-source ${DOTFILES}/lib/kdavh/ssh-helpers.sh
-sshagent_init > /dev/null
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 ip() {
   echo -e "WiFi:\t\t `ipconfig getifaddr en0 2> /dev/null`"
@@ -112,11 +56,83 @@ extract() {
       fi
 }
 
-# Avoid duplicates
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
+# taken from https://superuser.com/questions/141044/sharing-the-same-ssh-agent-among-multiple-login-sessions
 
-# After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+function sshagent_findsockets {
+    find /tmp -uid $(id -u) -type s -name agent.\* 2>/dev/null
+}
+
+function sshagent_testsocket {
+    if [ ! -x "$(which ssh-add)" ] ; then
+        echo "ssh-add is not available; agent testing aborted"
+        return 1
+    fi
+
+    if [ X"$1" != X ] ; then
+        export SSH_AUTH_SOCK=$1
+    fi
+
+    if [ X"$SSH_AUTH_SOCK" = X ] ; then
+        return 2
+    fi
+
+    if [ -S $SSH_AUTH_SOCK ] ; then
+        ssh-add -l > /dev/null
+        if [ $? = 2 ] ; then
+            echo "Socket $SSH_AUTH_SOCK is dead!  Deleting!"
+            rm -f $SSH_AUTH_SOCK
+            return 4
+        else
+            echo "Found ssh-agent $SSH_AUTH_SOCK"
+            return 0
+        fi
+    else
+        echo "$SSH_AUTH_SOCK is not a socket!"
+        return 3
+    fi
+}
+
+function sshagent_init {
+    # ssh agent sockets can be attached to a ssh daemon process or an
+    # ssh-agent process.
+
+    AGENTFOUND=0
+
+    # Attempt to find and use the ssh-agent in the current environment
+    if sshagent_testsocket ; then AGENTFOUND=1 ; fi
+
+    # If there is no agent in the environment, search /tmp for
+    # possible agents to reuse before starting a fresh ssh-agent
+    # process.
+    if [ $AGENTFOUND = 0 ] ; then
+        for agentsocket in $(sshagent_findsockets) ; do
+            if [ $AGENTFOUND != 0 ] ; then break ; fi
+            if sshagent_testsocket $agentsocket ; then AGENTFOUND=1 ; fi
+        done
+    fi
+
+    # If at this point we still haven't located an agent, it's time to
+    # start a new one
+    if [ $AGENTFOUND = 0 ] ; then
+        eval `ssh-agent`
+    fi
+
+    # Clean up
+    unset AGENTFOUND
+    unset agentsocket
+
+    # Finally, show what keys are currently in the agent
+    ssh-add -l
+}
+
+function sshadd_all {
+    # TODO don't try to re-add keys that have already been added.  you have to retype the password
+    printf "adding ssh keys...\n"
+    ls ~/.ssh/id_rsa* | grep -v '"'"'\.pub$'"'"' | xargs ssh-add 2> /dev/null
+    ls ~/.ssh/shared_keys/id_rsa* | grep -v '"'"'\.pub$'"'"' | xargs ssh-add 2> /dev/null
+}
+
+sshagent_init > /dev/null
+
+
+for f in ${HOME}/.shellrc.d/*; do source $f; done

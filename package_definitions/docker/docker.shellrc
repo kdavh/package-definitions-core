@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# docker
+alias dk=docker
+alias dkc=docker-compose
+alias dkm=docker-machine
+alias dk-start="systemctl start docker.service"
+alias dk-clean-i='docker rmi $(docker images -q --filter "dangling=true")'
+# docker based executables
+# https://hub.docker.com/r/codesimple/elm/
+alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 kdavh/elm'
+alias yarnsrv='PORTS=1 yarndk'
+alias yarnaws='AWS=1 yarndk'
+alias yarnsh='CMD=bash yarndk'

@@ -1,0 +1,124 @@
+[apply]
+  ignorewhitespace  = change
+
+[core]
+  excludesfile = ~/.gitignore_global
+  whitespace   = space-before-tab,trailing-space,blank-at-eol
+
+[pager]
+  # diff = diff-so-fancy | less --tabs=1,5 -RFX
+  # show = diff-so-fancy | less --tabs=1,5 -RFX
+
+# http://stackoverflow.com/questions/5480069/autosetuprebase-vs-autosetupmerge
+[branch]
+  autosetupmerge = always
+  autosetuprebase = never
+
+[credential]
+  helper = osxkeychain
+
+[user]
+  name = Kellen Hart
+  email = kellenhart@gmail.com
+
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+
+[core]
+  editor = vim
+
+[merge]
+  keepBackup = false;
+
+[mergetool]
+  keepBackup = false
+
+[push]
+  default = simple
+
+[rebase]
+  autosquash = true
+
+[status]
+  relativePaths      = true
+  submodulesummary   = true
+  showUntrackedFiles = all
+
+[alias]
+  # http://haacked.com/archive/2014/07/28/github-flow-aliases/
+  co = checkout
+  # checkout branch with submodules
+  co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive'
+  s = status
+  ss = status -s
+  b = branch
+  recent = "for-each-ref --format='%(committerdate:relative) %(refname:short)' --sort=-committerdate refs/heads/ --count 25"
+  c = commit
+  cal = !git add -A && git commit
+  cam = commit --amend
+  calam = !git add -A && git commit --amend
+  camne = commit --amend --no-edit
+  calamne = !git add -A && git commit --amend --no-edit
+  compl = !git checkout master && git pull
+  ps = push
+  # push new branch to new upstream branch of the same name
+  psup = push -u origin HEAD
+
+  pi = cherry-pick
+  pino = cherry-pick --no-commit
+
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  # xargs needs -r on non-macosx...
+  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+  bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+  purge-merged = "!${DOTFILES}/lib/kdavh/git-purge-merged.sh"
+  sall = !$DOTFILES/lib/kdavh/git-status-all $(pwd)
+  plall = !$DOTFILES/lib/kdavh/git-pull-all $(pwd)
+
+  summary = log --pretty=oneline
+  active  = branch --contains 'HEAD@{2 weeks ago}'
+  tree    = log --graph --pretty=oneline --abbrev-commit --decorate --color
+  forest  = log --graph --pretty=oneline --abbrev-commit --decorate --color --all
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  h = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  ll = log --decorate --graph
+  shf = diff-tree --no-commit-id --name-status -r # followed by commit or commit range
+
+  # submodule
+  sbu = submodule update --remote --merge
+  sbpl = submodule update --remote --merge
+  # gets submodules not yet pulled down from remote
+  sbget = !git submodule init && git pull --recurse-submodules  && git submodule update --recursive
+
+  a = add
+  ap = add -p
+  rs = reset
+  rsh1 = reset HEAD^
+  rb = rebase
+  d = diff
+  dh = diff HEAD
+  dh1 = diff HEAD~1
+  ds = diff --staged
+  pl = pull
+  plrb = pull --rebase
+  plrbd = pull --rebase origin develop
+  plrbm = pull --rebase origin master
+  mm = pull origin master
+  f = fetch
+
+[filter "media"]
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+[filter "lfs"]
+  clean = git lfs clean %f
+  smudge = git lfs smudge %f
+  required = true

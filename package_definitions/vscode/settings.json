@@ -1,0 +1,13 @@
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "extensions.ignoreRecommendations": false,
+    "window.restoreWindows": "all",
+    "workbench.startupEditor": "newUntitledFile",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "window.zoomLevel": 0,
+    "[python]": {},
+    "editor.wordWrap": "on",
+    "terminal.integrated.shell.osx": "/bin/bash",
+    "kite.showWelcomeNotificationOnStartup": false
+}

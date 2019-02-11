@@ -7,3 +7,5 @@ docker:
         brew install docker-compose
         # installs gui for docker daemon
         brew cask install docker
+
+        ln -fs ${DATA_DIR}/docker/docker.shellrc ${HOME}/.shellrc.d

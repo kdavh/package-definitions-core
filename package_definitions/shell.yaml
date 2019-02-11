@@ -1,0 +1,34 @@
+---
+shell:
+  dependencies: ['@:_shell_base']
+  definitions:
+    - os_flavors: ['mac']
+      check_install: |
+        # checking if profile is already in Terminal.app
+        /usr/libexec/PlistBuddy -c "print :'Window Settings':mac-terminal-app-profile" ~/Library/Preferences/com.apple.Terminal.plist  >/dev/null
+      install: |
+        echo 'NEW TERMINAL WINDOW WILL OPEN WITH PREFERRED THEME'
+        echo 'GO TO PREFERENCES AND MAKE IT DEFAULT MANUALLY'
+        open $DATA_DIR/shell/mac-terminal-app-profile.terminal
+    - os_flavors: ['debian']
+      check_install: |
+        test 1 = 1
+      install: |
+        # echo 'manual setup..., do what you like'
+
+
+_shell_base:
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        test -d $HOME/.profile.d && test -L $HOME/.shellrc
+
+      install: |
+        mkdir $HOME/.profile.d || true
+        mkdir $HOME/.shellrc.d || true
+
+        ln -fs ${DATA_DIR}/shell/.bashrc ${HOME}/
+        ln -fs ${DATA_DIR}/shell/.bash_profile ${HOME}/
+        ln -fs ${DATA_DIR}/shell/.profile ${HOME}/
+        ln -fs ${DATA_DIR}/shell/.shellrc ${HOME}/
+        ln -fs ${DATA_DIR}/shell/.editrc ${HOME}

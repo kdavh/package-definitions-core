@@ -25,42 +25,23 @@ pathmunge () {
 	fi
 }
 
-export GOPATH=$HOME/dev/go
-export GOME=$GOPATH/src/github.com/kdavh
-export DOTFILES=$HOME/dev/dotfiles
-
-if [[ -r "$HOME/dev/dotfiles-private/env.sh" ]]; then
-	INDENT="${INDENT}  " source "$HOME/dev/dotfiles-private/env.sh"
-fi
+for f in ${HOME}/.profile.d/*; do source $f; done
 
 export EDITOR=vim
 export PAGER="less"
 export LESS="-RMin"
 
 export SAVEHIST=9999
-export HISTSIZE=9999
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
 export HISTFILE=$HOME/.history
 export HIST_EXPIRE_DUPS_FIRST=true
+shopt -s histappend                      # append to history, don't overwrite it
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 
 # edit path
 pathmunge "/usr/local/bin" # put local at front of path for brew installs to be run before system installs
 pathmunge "$HOME/bin"
-pathmunge $GOPATH/bin after
-pathmunge /usr/local/go/bin after
-pathmunge "$DOTFILES/bin" after
-pathmunge "$HOME/.yarn/bin"
 pathmunge "$HOME/.local/bin" after
 
-# rust binaries
-if [[ -d $HOME/.cargo ]]; then
-	pathmunge "$HOME/.cargo/bin" after
-fi
-
 export CC=/usr/bin/gcc
-
-# load work specific environment
-if [[ -r "$HOME/.profile-work" ]]; then
-		INDENT="${INDENT}  " source "$HOME/.profile-work"
-fi
-
-export PATH="$HOME/.cargo/bin:$PATH"

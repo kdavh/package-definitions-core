@@ -6,3 +6,5 @@ rust:
         which rust
       install: |
         curl https://sh.rustup.rs -sSf | sh
+
+        ln -fs ${DATA_DIR}/rust/rust.profile ${HOME}/.profile.d

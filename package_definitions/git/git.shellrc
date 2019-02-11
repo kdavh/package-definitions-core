@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# https://github.com/git/git/tree/master/contrib/completion
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+alias g='git'
+alias gh='AUTH_TOKEN=$GITHUB_REPO_EDIT_TOKEN ${DOTFILES}/lib/kdavh/github_api.sh'
