@@ -5,6 +5,9 @@ turtl:
       check_install: |
         test -d $HOME/apps/turtl
       install: |
+        # these are requirements for electron apps on linux
+        sudo apt install libgconf-2-4 libnss3
+        
         cd $HOME
         mkdir ./apps
         download_link=$(curl https://turtlapp.com/download/ -s | grep -Po 'href="https:.*linux64.tar.bz2"' | grep -Po 'https:.*tar.bz2')
