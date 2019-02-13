@@ -3,8 +3,7 @@ git:
     - os_flavors: ['debian', 'mac']
       dependencies: ['@:shell']
       check_install: |
-        read
-        package_manager_check_install git
+        test 1 = 2
       install: |
         package_manager_install git
         ln -fs ${DATA_DIR}/git/.gitconfig ${HOME}/.gitconfig
