@@ -6,11 +6,12 @@ turtl:
         test -d $HOME/apps/turtl
       install: |
         cd $HOME
+        mkdir ./apps
         download_link=$(curl https://turtlapp.com/download/ -s | grep -Po 'href="https:.*linux64.tar.bz2"' | grep -Po 'https:.*tar.bz2')
         curl -L $download_link > turtl.tar.bz2
         tar xjf turtl.tar.bz2
-        ./turtl/install.sh ./apps/turtl
-        rm turtl.tar.bz2 && rm -r turtl
+        ./turtl-linux64/install.sh ./apps/turtl
+        rm turtl.tar.bz2 && rm -r turtl-linux64
 
     - os_flavors: ['mac']
       check_install: |

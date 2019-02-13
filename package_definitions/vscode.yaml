@@ -42,7 +42,10 @@ vscode:
       check_install: |
         command -v code && code --list-extensions | grep vscodevim
       install: |
-        go get -u mvdan.cc/sh/cmd/shfmt
+        echo 'run `go get -u mvdan.cc/sh/cmd/shfmt` in another terminal'
+        echo 'b/c of some crazy python shell idiosynchrousy that I can not figure out'
+        read
+
         code --install-extension foxundermoon.shell-format
         code --install-extension ms-python.python
         code --install-extension vscodevim.vim

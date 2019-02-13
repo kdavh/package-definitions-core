@@ -15,7 +15,7 @@ if `tty -s`; then
 	stty -ixon
 fi
 
-pathmunge () {
+function pathmunge () {
 	if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)" ; then
 		 if [ "$2" = "after" ] ; then
 				PATH="$PATH:$1"
@@ -25,7 +25,7 @@ pathmunge () {
 	fi
 }
 
-for f in ${HOME}/.profile.d/*; do source $f; done
+for f in $(find ${HOME}/.profile.d -maxdepth 1 -mindepth 1); do source $f; done
 
 export EDITOR=vim
 export PAGER="less"

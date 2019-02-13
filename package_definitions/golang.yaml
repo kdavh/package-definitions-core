@@ -1,5 +1,6 @@
 ---
 golang:
+  dependencies: ['@:shell']
   definitions:
     - os_flavors: ['debian']
       check_install: |

@@ -137,4 +137,4 @@ function sshadd_all {
 sshagent_init > /dev/null
 
 
-for f in ${HOME}/.shellrc.d/*; do source $f; done
+for f in $(find ${HOME}/.shellrc.d -maxdepth 1 -mindepth 1); do source $f; done
