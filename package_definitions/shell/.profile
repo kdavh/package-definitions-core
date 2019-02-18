@@ -27,17 +27,6 @@ function pathmunge () {
 
 for f in $(find ${HOME}/.profile.d -maxdepth 1 -mindepth 1); do source $f; done
 
-export EDITOR=vim
-export PAGER="less"
-export LESS="-RMin"
-
-export SAVEHIST=9999
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-export HISTFILE=$HOME/.history
-export HIST_EXPIRE_DUPS_FIRST=true
-shopt -s histappend                      # append to history, don't overwrite it
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 
 # edit path
 pathmunge "/usr/local/bin" # put local at front of path for brew installs to be run before system installs
