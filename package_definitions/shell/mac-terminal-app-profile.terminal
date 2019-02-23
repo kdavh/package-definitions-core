@@ -148,6 +148,8 @@
 	</data>
 	<key>Bell</key>
 	<false/>
+	<key>CommandString</key>
+	<string></string>
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -159,6 +161,8 @@
 	</data>
 	<key>ProfileCurrentVersion</key>
 	<real>2.0600000000000001</real>
+	<key>RunCommandAsShell</key>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -188,11 +192,11 @@
 	rK+0AAAAAAAAAQEAAAAAAAAAGQAAAAAAAAAAAAAAAAAAALY=
 	</data>
 	<key>columnCount</key>
-	<integer>120</integer>
+	<integer>180</integer>
 	<key>name</key>
-	<string>My profile</string>
+	<string>mac-terminal-app-profile</string>
 	<key>rowCount</key>
-	<integer>36</integer>
+	<integer>50</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useOptionAsMetaKey</key>

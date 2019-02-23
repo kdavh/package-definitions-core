@@ -16,6 +16,9 @@ shell:
         chsh -s /usr/local/bin/bash
         sudo chsh -s /usr/local/bin/bash
 
+      export: |
+        /usr/libexec/PlistBuddy -x -c "print :'Window Settings':mac-terminal-app-profile" ~/Library/Preferences/com.apple.Terminal.plist > $DATA_DIR/shell/mac-terminal-app-profile.terminal
+
     - os_flavors: ['debian']
       check_install: |
         test 1 = 1
