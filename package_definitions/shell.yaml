@@ -10,6 +10,12 @@ shell:
         echo 'NEW TERMINAL WINDOW WILL OPEN WITH PREFERRED THEME'
         echo 'GO TO PREFERENCES AND MAKE IT DEFAULT MANUALLY'
         open $DATA_DIR/shell/mac-terminal-app-profile.terminal
+
+        # use newer bash than macos default 3.5...
+        sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+        chsh -s /usr/local/bin/bash
+        sudo chsh -s /usr/local/bin/bash
+
     - os_flavors: ['debian']
       check_install: |
         test 1 = 1

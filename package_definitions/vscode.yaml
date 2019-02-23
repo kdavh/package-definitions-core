@@ -36,7 +36,7 @@ _vscode_base:
 
 
 vscode:
-  dependencies: ['@:_vscode_base', '@:golang']
+  dependencies: ['@:_vscode_base', '@:golang', '@:shell']
   definitions:
     - os_flavors: ['debian', 'mac']
       check_install: |
