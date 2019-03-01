@@ -1,6 +1,7 @@
 docker:
   definitions:
     - os_flavors: ['mac']
+      dependencies: ['@:shell']
       check_install: brew ls --versions docker && brew ls --versions docker-compose
       install: |
         brew install docker
@@ -8,4 +9,4 @@ docker:
         # installs gui for docker daemon
         brew cask install docker
 
-        ln -fs ${DATA_DIR}/docker/docker.shellrc ${HOME}/.shellrc.d
+        ln -fs ${DATA_DIR}/docker/docker.shellrc ${HOME}/.shellrc.d/

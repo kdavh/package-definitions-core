@@ -21,9 +21,14 @@ shell:
 
     - os_flavors: ['debian']
       check_install: |
-        test 1 = 1
+        package_manager_check_install tilix
       install: |
-        # echo 'manual setup..., do what you like'
+        package_manager_install tilix
+        dconf load /com/gexperts/Tilix/ < $CODE_DIR/tilix.dconf
+        # if I ever want to save custom themes or shortcuts: see ~/.config/tilix
+
+      export: |
+        dconf dump /com/gexperts/Tilix/ > $CODE_DIR/tilix.dconf
 
 
 _shell_base:

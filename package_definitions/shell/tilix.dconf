@@ -1,0 +1,23 @@
+[/]
+warn-vte-config-issue=false
+prompt-on-close=true
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', 'fbd4ce37-881d-44ac-925e-32e0265c5588']
+default='fbd4ce37-881d-44ac-925e-32e0265c5588'
+
+[profiles/fbd4ce37-881d-44ac-925e-32e0265c5588]
+foreground-color='#A1B0B8'
+visible-name='My Settings'
+login-shell=true
+palette=['#252525', '#FF5252', '#C3D82C', '#FFC135', '#42A5F5', '#D81B60', '#00ACC1', '#F5F5F5', '#708284', '#FF5252', '#C3D82C', '#FFC135', '#42A5F5', '#D81B60', '#00ACC1', '#F5F5F5']
+badge-color-set=false
+cursor-colors-set=false
+highlight-colors-set=false
+use-theme-colors=false
+bold-color-set=false
+background-color='#263238'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+login-shell=true
+visible-name='Default'

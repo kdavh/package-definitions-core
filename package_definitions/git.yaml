@@ -10,4 +10,4 @@ git:
         ln -fs ${DATA_DIR}/git/.gitignore ${HOME}/.gitignore
         ln -fs ${DATA_DIR}/git/.git-completion.bash ${HOME}/.git-completion.bash
 
-        ln -fs ${DATA_DIR}/git/git.shellrc ${HOME}/.shellrc.d
+        ln -fs ${DATA_DIR}/git/git.shellrc ${HOME}/.shellrc.d/

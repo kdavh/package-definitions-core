@@ -1,7 +1,7 @@
 nvm:
   definitions:
     - os_flavors: ['debian', 'mac']
-      dependencies: ['@:git']
+      dependencies: ['@:git', '@:shell']
       check_install: |
         test -d $HOME/.nvm
       install: |
@@ -12,4 +12,4 @@ nvm:
         ) && source "$NVM_DIR/nvm.sh"
         nvm install node
 
-        ln -fs ${DATA_DIR}/nvm/nvm.shellrc ${HOME}/.shellrc.d
+        ln -fs ${DATA_DIR}/nvm/nvm.shellrc ${HOME}/.shellrc.d/

@@ -1,10 +1,10 @@
 rust:
   definitions:
     - os_flavors: ['debian', 'mac']
-      dependencies: ['@:curl']
+      dependencies: ['@:curl', '@:shell']
       check_install: |
         which rust
       install: |
         curl https://sh.rustup.rs -sSf | sh
 
-        ln -fs ${DATA_DIR}/rust/rust.profile ${HOME}/.profile.d
+        ln -fs ${DATA_DIR}/rust/rust.profile ${HOME}/.profile.d/
