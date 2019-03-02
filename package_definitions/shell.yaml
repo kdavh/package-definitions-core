@@ -23,13 +23,14 @@ shell:
       check_install: |
         package_manager_check_install tilix
       install: |
-        package_manager_install tilix
-        dconf load /com/gexperts/Tilix/ < $CODE_DIR/tilix.dconf
-        # if I ever want to save custom themes or shortcuts: see ~/.config/tilix
         echo 'deb http://ftp.debian.org/debian stretch-backports main' | sudo tee /etc/apt/sources.list.d/stretch-backports.list
         sudo apt update
         sudo apt -y install tilix
         sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
+        
+        dconf load /com/gexperts/Tilix/ < $CODE_DIR/tilix.dconf
+        # if I ever want to save custom themes or shortcuts: see ~/.config/tilix
+        
       export: |
         dconf dump /com/gexperts/Tilix/ > $CODE_DIR/tilix.dconf
 
