@@ -28,11 +28,11 @@ shell:
         sudo apt -y install tilix
         sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
         
-        dconf load /com/gexperts/Tilix/ < $CODE_DIR/tilix.dconf
+        dconf load /com/gexperts/Tilix/ < $DATA_DIR/tilix.dconf
         # if I ever want to save custom themes or shortcuts: see ~/.config/tilix
         
       export: |
-        dconf dump /com/gexperts/Tilix/ > $CODE_DIR/tilix.dconf
+        dconf dump /com/gexperts/Tilix/ > $DATA_DIR/tilix.dconf
 
 
 _shell_base:
