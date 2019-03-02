@@ -9,5 +9,6 @@
     "[python]": {},
     "editor.wordWrap": "on",
     "terminal.integrated.shell.osx": "/usr/local/bin/bash",
-    "kite.showWelcomeNotificationOnStartup": false
+    "kite.showWelcomeNotificationOnStartup": false,
+    "python.diagnostics.sourceMapsEnabled": true
 }
