@@ -6,7 +6,7 @@ _vscode_base:
         command -v code
       install: |
         curl -L https://update.code.visualstudio.com/latest/linux-deb-x64/stable > vscode.deb
-        sudo apt install "$PWD"/vscode.deb
+        sudo apt install -y "$PWD"/vscode.deb
         rm vscode.deb
 
         vscode_dir="$HOME/.config/Code/User/"
