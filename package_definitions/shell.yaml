@@ -29,7 +29,7 @@ shell:
         sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
         
         dconf load /com/gexperts/Tilix/ < $DATA_DIR/tilix.dconf
-        # if I ever want to save custom themes or shortcuts: see ~/.config/tilix
+        # if I ever want to save custom themes or shortcuts: see ~/.config/shell/tilix
         
       export: |
         dconf dump /com/gexperts/Tilix/ > $DATA_DIR/tilix.dconf
