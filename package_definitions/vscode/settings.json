@@ -10,5 +10,13 @@
     "editor.wordWrap": "on",
     "terminal.integrated.shell.osx": "/usr/local/bin/bash",
     "kite.showWelcomeNotificationOnStartup": false,
-    "python.diagnostics.sourceMapsEnabled": true
+    "python.diagnostics.sourceMapsEnabled": false,
+    "breadcrumbs.enabled": true,
+    "editor.acceptSuggestionOnEnter": "smart",
+    // Controls whether suggestions should automatically show up while typing.
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    }
 }

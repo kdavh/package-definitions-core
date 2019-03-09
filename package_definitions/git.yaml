@@ -1,7 +1,7 @@
 git:
+  dependencies: ['@:shell']
   definitions:
     - os_flavors: ['debian', 'mac']
-      dependencies: ['@:shell']
       check_install: |
         package_manager_check_install git && test -f ${HOME}/.shellrc.d/git.shellrc
       install: |

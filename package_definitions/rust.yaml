@@ -1,7 +1,7 @@
 rust:
+  dependencies: ['@:curl', '@:shell']
   definitions:
     - os_flavors: ['debian', 'mac']
-      dependencies: ['@:curl', '@:shell']
       check_install: |
         which rust
       install: |

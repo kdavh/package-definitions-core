@@ -1,7 +1,7 @@
 docker:
+  dependencies: ['@:shell']
   definitions:
     - os_flavors: ['mac']
-      dependencies: ['@:shell']
       check_install: brew ls --versions docker && brew ls --versions docker-compose
       install: |
         brew install docker

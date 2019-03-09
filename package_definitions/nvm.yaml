@@ -1,7 +1,7 @@
 nvm:
+  dependencies: ['@:git', '@:shell']
   definitions:
     - os_flavors: ['debian', 'mac']
-      dependencies: ['@:git', '@:shell']
       check_install: |
         test -d $HOME/.nvm
       install: |

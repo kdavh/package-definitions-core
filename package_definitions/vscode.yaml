@@ -49,3 +49,4 @@ vscode:
         code --install-extension foxundermoon.shell-format
         code --install-extension ms-python.python
         code --install-extension vscodevim.vim
+        code --install-extension Atishay-Jain.All-Autocomplete
