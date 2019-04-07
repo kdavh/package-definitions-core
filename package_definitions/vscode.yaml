@@ -12,6 +12,7 @@ _vscode_base:
         vscode_dir="$HOME/.config/Code/User/"
         mkdir -p "${vscode_dir}"
         ln -fs $DATA_DIR/vscode/settings.json "${vscode_dir}"
+        ln -fs $DATA_DIR/vscode/keybindings.json "${vscode_dir}"
         # rm -r "${vscode_dir}"/snippets
         # ln -fns $DATA_DIR/vscode/snippets "${vscode_dir}"
 
