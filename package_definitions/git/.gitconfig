@@ -7,7 +7,9 @@
 
 [pager]
   # diff = diff-so-fancy | less --tabs=1,5 -RFX
-  # show = diff-so-fancy | less --tabs=1,5 -RFX
+  diff = less --tabs=1,5 -RFX
+  show = less --tabs=1,5 -RFX
+  branch = false
 
 # http://stackoverflow.com/questions/5480069/autosetuprebase-vs-autosetupmerge
 [branch]
@@ -74,7 +76,7 @@
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   up = !git pull --rebase --prune $@ && git submodule update --init --recursive
   # xargs needs -r on non-macosx...
-  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+  bclean = !echo "run g-prune-delete instead"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
   sall = !$DOTFILES/lib/kdavh/git-status-all $(pwd)

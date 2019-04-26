@@ -1,0 +1,8 @@
+workstation_config_shell:
+  dependencies: ['@:shell']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        test -f ${HOME}/.shellrc.d/workstation_config_shell.shellrc
+      install: |
+        ln -fs ${DATA_DIR}/workstation_config_shell/workstation_config_shell.shellrc ${HOME}/.shellrc.d/
