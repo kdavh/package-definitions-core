@@ -33,4 +33,4 @@ pathmunge "/usr/local/bin" # put local at front of path for brew installs to be 
 pathmunge "$HOME/bin"
 pathmunge "$HOME/.local/bin" after
 
-export CC=/usr/bin/gcc
+# export CC=/usr/bin/gcc

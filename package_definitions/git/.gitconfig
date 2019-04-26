@@ -50,6 +50,7 @@
 [alias]
   # http://haacked.com/archive/2014/07/28/github-flow-aliases/
   co = checkout
+  com = checkout master
   # checkout branch with submodules
   co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive'
   s = status
@@ -75,7 +76,7 @@
   # xargs needs -r on non-macosx...
   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-  purge-merged = "!${DOTFILES}/lib/kdavh/git-purge-merged.sh"
+
   sall = !$DOTFILES/lib/kdavh/git-status-all $(pwd)
   plall = !$DOTFILES/lib/kdavh/git-pull-all $(pwd)
 

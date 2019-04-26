@@ -7,3 +7,6 @@ fi
 
 alias g='git'
 alias gh='AUTH_TOKEN=$GITHUB_REPO_EDIT_TOKEN ${DOTFILES}/lib/kdavh/github_api.sh'
+alias g-prune-delete='git checkout master && comm -12 <(git branch | sed "s/ *//g") <(git remote prune origin --dry-run | sed "s/^.*origin\\///g") | xargs -L1 -J % git branch -D %'
+
+__git_complete g __git_main
