@@ -1,0 +1,8 @@
+aws:
+  dependencies: ['@:shell']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        which aws
+      install: |
+        pip3 install awscli
