@@ -6,3 +6,4 @@ aws:
         which aws
       install: |
         pip3 install awscli
+        aws configure
