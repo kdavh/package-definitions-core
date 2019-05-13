@@ -1,5 +1,6 @@
 ---
 _vscode_base:
+  dependencies: ['@:curl']
   definitions:
     - os_flavors: ['debian']
       check_install: |

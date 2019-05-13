@@ -2,9 +2,6 @@
 
 ### TODO: all the stuff in dotfiles
 
-### TODO:
-# pip install awscli \ # https://github.com/aws/aws-cl
-
 
 ### TODO: debian: xclip \ xsel \ inotify-tools \
 

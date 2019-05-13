@@ -1,0 +1,9 @@
+snap:
+  definitions:
+    - os_flavors: ['debian']
+      check_install: |
+        which snap
+      install: |
+        # note, doesn't yet work on crostini, missing squash... stuff
+        sudo apt install snapd
+

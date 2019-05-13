@@ -3,6 +3,7 @@ aws:
   definitions:
     - os_flavors: ['debian', 'mac']
       check_install: |
+        echo "Something is wrong with this check, even if I source ~/.bash_profile aws can't be found, but in install command it can be found"
         which aws
       install: |
         pip3 install awscli
