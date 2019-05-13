@@ -52,20 +52,32 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-function __git_branch_str() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-function __exit_code_str() {
-    exit="$?"
-    if [ $exit != 0 ]; then
-        printf "\033[91m\xE2\x86\xB3$exit \033[0m"
-    fi
-}
-
 export PS1
 
 if [ "$color_prompt" = yes ]; then
-    PS1='$(__exit_code_str)${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_branch_str)\$ '
+    RESET="\[$(     tput sgr0)\]" # == "\[\033[00m\]"
+    # BRIGHT="\[$(    tput bold)\]"
+    # BLACK="\[$(     tput setaf 0)\]"
+    RED="\[$(       tput setaf 1)\]"
+    # GREEN="\[$(     tput setaf 2)\]"
+    YELLOW="\[$(    tput setaf 3)\]"
+    BLUE="\[$(      tput setaf 4)\]"
+    # MAGENTA="\[$(   tput setaf 5)\]"
+    # CYAN="\[$(      tput setaf 6)\]"
+    # WHITE="\[$(     tput setaf 7)\]"
+    # FGDEFAULT="\[$( tput setaf 9)\]"
+    function __git_branch_str() {
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    }
+    function __exit_code_str() {
+        exit="$?"
+        if [ $exit != 0 ]; then
+            echo "-->$exit "
+        fi
+    }
+
+    # double quotes so that color vars are substituted immediately while the rest are escaped like \$ so they are saved literally in PS1 string to be interpretted later
+    PS1="$RED\$(__exit_code_str)$RESET\${debian_chroot:+(\$debian_chroot)}$YELLOW\u@\h$RESET:$BLUE\w$RESET\$(__git_branch_str)\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
