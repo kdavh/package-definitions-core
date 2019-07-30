@@ -27,5 +27,6 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+    "terminal.integrated.inheritEnv": false
 }
