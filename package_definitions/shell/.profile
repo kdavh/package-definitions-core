@@ -34,5 +34,3 @@ pathmunge "$HOME/bin"
 pathmunge "$HOME/.local/bin" after
 
 # export CC=/usr/bin/gcc
-source /usr/local/etc/bashrc.twilio
-source /usr/local/etc/bashrc.xteam
