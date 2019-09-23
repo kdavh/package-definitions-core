@@ -69,6 +69,7 @@ if [ "$color_prompt" = yes ]; then
     function __git_branch_str() {
         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
     }
+    # TODO: only show once https://stackoverflow.com/questions/49347518/zsh-prompt-showing-last-error-code-only-once
     function __exit_code_str() {
         exit="$?"
         if [ $exit != 0 ]; then

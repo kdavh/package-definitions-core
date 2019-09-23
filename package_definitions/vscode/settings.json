@@ -5,7 +5,7 @@
     "workbench.startupEditor": "newUntitledFile",
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "[python]": {},
     "editor.wordWrap": "on",
     "terminal.integrated.shell.osx": "/usr/local/bin/bash",
