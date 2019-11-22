@@ -38,7 +38,7 @@ _vscode_base:
 
 
 vscode:
-  dependencies: ['@:_vscode_base', '@:golang', '@:shell']
+  dependencies: ['@:_vscode_base', '@:vscode_extensions', '@:golang', '@:shell']
   definitions:
     - os_flavors: ['debian', 'mac']
       check_install: |
@@ -48,6 +48,14 @@ vscode:
         echo 'b/c of some crazy python shell idiosynchrousy that I can not figure out'
         read
 
+
+vscode_extensions:
+  dependencies: ['@:_vscode_base']
+  definitions:
+    - os_flavors: ['debian', 'mac']
+      check_install: |
+        command -v code && code --list-extensions | grep vscodevim
+      install: |
         code --install-extension foxundermoon.shell-format
         code --install-extension ms-python.python
         code --install-extension vscodevim.vim

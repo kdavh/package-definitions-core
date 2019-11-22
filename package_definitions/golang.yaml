@@ -23,7 +23,7 @@ golang:
         cd $HOME
         download_link=$(curl -s https://golang.org/dl/ | grep -Eo -m 1 'href="https://dl.google.com.*.darwin-amd64.pkg"' | grep -Eo 'https.*amd64.pkg')
         curl $download_link > golang.pkg
-        sudo installer -pkg golang.pkg -target /
+        sudo /usr/sbin/installer -pkg golang.pkg -target /
         rm golang.pkg
 
         ln -fs ${DATA_DIR}/golang/golang.profile ${HOME}/.profile.d/

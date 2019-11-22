@@ -28,7 +28,8 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+# not available in default mac or brew bash
+# shopt -s globstar
 
 
 # enable programmable completion features (you don't need to enable

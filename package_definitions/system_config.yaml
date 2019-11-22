@@ -6,12 +6,13 @@ system_config:
         test $(defaults read com.apple.finder AppleShowAllFiles) = '1'
       install: |
         # show hidden files in Finder
+        # not needed anymore b/c of cmd + shift + . shortcut?
         defaults write com.apple.finder AppleShowAllFiles -boolean true; killall Finder # to restart
-
-        computer_name="${USER}-mac"
-        sudo scutil --set ComputerName "${computer_name}"
-        sudo scutil --set LocalHostName "${computer_name}"
-        sudo scutil --set HostName "${computer_name}"
+        
+        computer_name=${USER}-mac
+        sudo /usr/sbin/scutil --set ComputerName "${computer_name}"
+        sudo /usr/sbin/scutil --set LocalHostName "${computer_name}"
+        sudo /usr/sbin/scutil --set HostName "${computer_name}"
         dscacheutil -flushcache
 
     - os_flavors: ['debian']
