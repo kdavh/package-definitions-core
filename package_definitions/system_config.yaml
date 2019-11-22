@@ -8,7 +8,7 @@ system_config:
         # show hidden files in Finder
         # not needed anymore b/c of cmd + shift + . shortcut?
         defaults write com.apple.finder AppleShowAllFiles -boolean true; killall Finder # to restart
-        
+
         computer_name=${USER}-mac
         sudo /usr/sbin/scutil --set ComputerName "${computer_name}"
         sudo /usr/sbin/scutil --set LocalHostName "${computer_name}"
