@@ -1,32 +1,33 @@
 {
-    "vim.disableAnnoyingNeovimMessage": true,
-    "extensions.ignoreRecommendations": false,
-    "window.restoreWindows": "all",
-    "workbench.startupEditor": "newUntitledFile",
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 1,
     "[python]": {},
-    "editor.wordWrap": "on",
-    "terminal.integrated.shell.osx": "/usr/local/bin/bash",
-    "kite.showWelcomeNotificationOnStartup": false,
-    "python.diagnostics.sourceMapsEnabled": false,
     "breadcrumbs.enabled": true,
     "editor.acceptSuggestionOnEnter": "smart",
-    // Controls whether suggestions should automatically show up while typing.
     "editor.quickSuggestions": {
-        "other": true,
         "comments": true,
+        "other": true,
         "strings": true
     },
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.wordWrap": "on",
+    "extensions.ignoreRecommendations": false,
     "files.exclude": {
         "**/.classpath": true,
+        "**/.factorypath": true,
         "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
+        "**/.settings": true
     },
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "kite.showWelcomeNotificationOnStartup": false,
+    "python.diagnostics.sourceMapsEnabled": false,
     "python.jediEnabled": false,
-    "terminal.integrated.inheritEnv": false
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.shell.osx": "/usr/local/bin/bash",
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "newUntitledFile",
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
 }

@@ -5,3 +5,9 @@ python3:
         which python3
       install: |
         apt install -y python3 python3-pip
+    - os_flavors: ['mac']
+      check_install: |
+        which python3
+      install: |
+        apt install -y python3 python3-pip
+

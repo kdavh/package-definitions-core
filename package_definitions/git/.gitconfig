@@ -79,9 +79,6 @@
   bclean = !echo "run g-prune-delete instead"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
-  sall = !$DOTFILES/lib/kdavh/git-status-all $(pwd)
-  plall = !$DOTFILES/lib/kdavh/git-pull-all $(pwd)
-
   summary = log --pretty=oneline
   active  = branch --contains 'HEAD@{2 weeks ago}'
   tree    = log --graph --pretty=oneline --abbrev-commit --decorate --color
