@@ -29,5 +29,6 @@
     "window.zoomLevel": 1,
     "workbench.startupEditor": "newUntitledFile",
     "go.formatTool": "goimports",
-    "go.useLanguageServer": true
+    "go.useLanguageServer": true,
+    "python.languageServer": "Microsoft"
 }
