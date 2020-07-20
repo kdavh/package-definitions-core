@@ -1,5 +1,4 @@
 {
-    "[python]": {},
     "breadcrumbs.enabled": true,
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.quickSuggestions": {
@@ -18,17 +17,37 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-    "kite.showWelcomeNotificationOnStartup": false,
     "python.diagnostics.sourceMapsEnabled": false,
-    "python.jediEnabled": false,
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.shell.osx": "/usr/local/bin/bash",
-    "vim.disableAnnoyingNeovimMessage": true,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
     "window.zoomLevel": 1,
     "workbench.startupEditor": "newUntitledFile",
     "go.formatTool": "goimports",
     "go.useLanguageServer": true,
+<<<<<<< HEAD
     "python.languageServer": "Microsoft"
+=======
+    "explorer.autoReveal": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    "python.languageServer": "Microsoft",
+    "editor.formatOnSave": false,
+    "[go]": {
+        "editor.formatOnSave": true
+    },
+    "[python]": {
+        "editor.formatOnSave": false
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "explorer.confirmDragAndDrop": false
+>>>>>>> git shortcut updates; vscode settings
 }

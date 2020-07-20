@@ -32,10 +32,17 @@
 [core]
   editor = vim
 
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code -n --wait --diff $LOCAL $REMOTE
+
 [merge]
+  tool = vscode
   keepBackup = false;
 
-[mergetool]
+[mergetool "vscode"]
+  cmd = code -n --wait $MERGED
   keepBackup = false
 
 [push]
@@ -52,29 +59,27 @@
 [alias]
   # http://haacked.com/archive/2014/07/28/github-flow-aliases/
   co = checkout
-  com = checkout master
+  coma = checkout master
   # checkout branch with submodules
   co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive'
-  s = status
-  ss = status -s
-  b = branch
+  st = status
+  br = branch
   recent = "for-each-ref --format='%(committerdate:relative) %(refname:short)' --sort=-committerdate refs/heads/ --count 25"
-  c = commit
-  cal = !git add -A && git commit
-  cam = commit --amend
-  calam = !git add -A && git commit --amend
-  camne = commit --amend --no-edit
-  calamne = !git add -A && git commit --amend --no-edit
-  compl = !git checkout master && git pull
+  cm = commit
+  cmal = !git add -A && git commit
+  cmam = commit --amend
+  cmalam = !git add -A && git commit --amend
+  cmamne = commit --amend --no-edit
+  cmalamne = !git add -A && git commit --amend --no-edit
+  comapl = !git checkout master && git pull
   ps = push
   # push new branch to new upstream branch of the same name
   psup = push -u origin HEAD
 
   pi = cherry-pick
-  pino = cherry-pick --no-commit
+  pinc = cherry-pick --no-commit
 
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
   # xargs needs -r on non-macosx...
   bclean = !echo "run g-prune-delete instead"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
@@ -83,32 +88,29 @@
   active  = branch --contains 'HEAD@{2 weeks ago}'
   tree    = log --graph --pretty=oneline --abbrev-commit --decorate --color
   forest  = log --graph --pretty=oneline --abbrev-commit --decorate --color --all
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  h = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  ll = log --decorate --graph
-  shf = diff-tree --no-commit-id --name-status -r # followed by commit or commit range
+  lg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  lggr = log --decorate --graph
+  dt = diff-tree --no-commit-id --name-status -r # followed by commit or commit range
 
   # submodule
-  sbu = submodule update --remote --merge
-  sbpl = submodule update --remote --merge
+  sbup = submodule update --remote --merge
   # gets submodules not yet pulled down from remote
-  sbget = !git submodule init && git pull --recurse-submodules  && git submodule update --recursive
+  sbin = !git submodule init && git pull --recurse-submodules  && git submodule update --recursive
 
-  a = add
-  ap = add -p
+  ad = add
   rs = reset
   rsh1 = reset HEAD^
   rb = rebase
-  d = diff
-  dh = diff HEAD
-  dh1 = diff HEAD~1
-  ds = diff --staged
+  df = diff
+  dfhd = diff HEAD
+  dfh1 = diff HEAD~1
+  dfst = diff --staged
   pl = pull
   plrb = pull --rebase
-  plrbd = pull --rebase origin develop
-  plrbm = pull --rebase origin master
-  mm = pull origin master
-  f = fetch
+  plrbdv = pull --rebase origin develop
+  plrbma = pull --rebase origin master
+  ss = stash
+  sspp = stash pop
 
 [filter "media"]
   required = true
