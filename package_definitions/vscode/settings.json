@@ -17,7 +17,6 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-    "python.diagnostics.sourceMapsEnabled": false,
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.shell.osx": "/usr/local/bin/bash",
     "window.restoreWindows": "all",
@@ -25,9 +24,6 @@
     "workbench.startupEditor": "newUntitledFile",
     "go.formatTool": "goimports",
     "go.useLanguageServer": true,
-<<<<<<< HEAD
-    "python.languageServer": "Microsoft"
-=======
     "explorer.autoReveal": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
@@ -37,7 +33,6 @@
     "gitlens.views.lineHistory.location": "gitlens",
     "gitlens.views.compare.location": "gitlens",
     "gitlens.views.search.location": "gitlens",
-    "python.languageServer": "Microsoft",
     "editor.formatOnSave": false,
     "[go]": {
         "editor.formatOnSave": true
@@ -45,9 +40,10 @@
     "[python]": {
         "editor.formatOnSave": false
     },
+    "python.languageServer": "Microsoft",
+    "python.diagnostics.sourceMapsEnabled": false,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
     "explorer.confirmDragAndDrop": false
->>>>>>> git shortcut updates; vscode settings
 }
