@@ -1,10 +1,21 @@
 aws:
   dependencies: ['@:shell']
   definitions:
-    - os_flavors: ['debian', 'mac']
+    - os_flavors: ['debian']
       check_install: |
         echo "Something is wrong with this check, even if I source ~/.bash_profile aws can't be found, but in install command it can be found"
         which aws
       install: |
         pip3 install awscli
         aws configure
+
+        ln -fs ${DATA_DIR}/aws/aws.shellrc ${HOME}/.shellrc.d/
+
+    - os_flavors: ['mac']
+      check_install: |
+        which aws
+      install: |
+        brew reinstall awscli
+        aws configure
+
+        ln -fs ${DATA_DIR}/aws/aws.shellrc ${HOME}/.shellrc.d/
