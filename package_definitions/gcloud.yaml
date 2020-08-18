@@ -14,3 +14,18 @@ gcloud:
 
         # Update the package list and install the Cloud SDK
         sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+        ln -fs ${DATA_DIR}/gcloud/gcloud.shellrc ${HOME}/.shellrc.d/
+
+    - os_flavors: ['mac']
+      check_install: |
+        which gcloud
+      install: |
+        #TODO: keep link up to date
+        cd ${HOME}
+        https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-305.0.0-darwin-x86_64.tar.gz
+        extract ./google-cloud-sdk-305.0.0-darwin-x86_64.tar.gz
+        rm ./google-cloud-sdk-305.0.0-darwin-x86_64.tar.gz
+        ./google-cloud-sdk/install.sh
+
+        ln -fs ${DATA_DIR}/gcloud/gcloud.shellrc ${HOME}/.shellrc.d/
