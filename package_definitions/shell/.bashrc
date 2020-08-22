@@ -44,14 +44,3 @@ if ! shopt -oq posix; then
 fi
 
 [[ -r ~/.shellrc ]] && INDENT="$INDENT  " source ~/.shellrc
-
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/kellenhart/projects/com-pahart/node_modules/tabtab/.completions/serverless.bash ] && . /home/kellenhart/projects/com-pahart/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/kellenhart/projects/com-pahart/node_modules/tabtab/.completions/sls.bash ] && . /home/kellenhart/projects/com-pahart/node_modules/tabtab/.completions/sls.bash
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[ -f /home/kellenhart/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/kellenhart/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
