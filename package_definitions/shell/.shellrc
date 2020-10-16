@@ -229,5 +229,19 @@ function sshadd_all {
 
 sshagent_init > /dev/null
 
+function alert {
+    if [ "$(uname)" != "Darwin" ]; then
+        printf "alert command only available on Mac";
+        return 1;
+    fi
+
+    if ! command -v terminal-notifier 1>/dev/null; then
+        printf "Installing terminal-notifier before alerting";
+        brew install terminal-notifier;
+    fi
+
+    terminal-notifier -title "Terminal Command" -message "$1"
+}
+
 
 for f in $(find ${HOME}/.shellrc.d -maxdepth 1 -mindepth 1); do source $f; done
